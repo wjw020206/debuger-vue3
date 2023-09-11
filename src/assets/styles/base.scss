@@ -1,0 +1,25 @@
+@import 'normalize.css/normalize.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  // 主色调
+  $primaryColor: #0473ff;
+
+  // 页面字体
+  $fontFamily: 'PingFang SC', 'Microsoft YaHei';
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}

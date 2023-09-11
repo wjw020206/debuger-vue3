@@ -1,0 +1,23 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[html][css][json][jsonc][javascript][vue][scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.exclude": {
+    "**/node_modules": true
+  },
+  "path-intellisense.mappings": {
+    "@": "${workspaceRoot}/src"
+  },
+  "alias-skip.mappings": {
+    "@": "/src"
+  },
+  "git.autofetch": true,
+  "GitCommitPlugin.ShowEmoji": false,
+  "git.confirmSync": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "editor.codeLens": false,
+  "eslint.enable": true,
+  "scss.lint.unknownAtRules": "ignore"
+}
