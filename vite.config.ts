@@ -18,7 +18,7 @@ export default defineConfig({
       // 导入vue以及其他 api按需加载
       imports: ['vue', 'vue-router', 'pinia'],
       // 目录文件按需加载
-      dirs: ['src/composables/**/*', 'src/enums/**/*', 'src/stores/**/*'],
+      dirs: ['src/enums/**/*', 'src/stores/**/*'],
       vueTemplate: true,
       // 类型文件输出目录
       dts: 'src/types/auto-imports.d.ts'
@@ -49,6 +49,13 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@import "./src/assets/styles/var.scss";'
+      }
     }
   }
 });

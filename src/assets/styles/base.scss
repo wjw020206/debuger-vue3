@@ -8,12 +8,8 @@
   box-sizing: border-box;
 }
 
-:root {
-  // 主色调
-  $primaryColor: #0473ff;
-
-  // 页面字体
-  $fontFamily: 'PingFang SC', 'Microsoft YaHei';
+html {
+  font-family: $font-family;
 }
 
 a {

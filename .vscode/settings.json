@@ -1,6 +1,6 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[html][css][json][jsonc][javascript][vue][scss]": {
+  "[html][css][json][jsonc][typescript][vue][scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "files.exclude": {
@@ -8,9 +8,6 @@
   },
   "path-intellisense.mappings": {
     "@": "${workspaceRoot}/src"
-  },
-  "alias-skip.mappings": {
-    "@": "/src"
   },
   "git.autofetch": true,
   "GitCommitPlugin.ShowEmoji": false,

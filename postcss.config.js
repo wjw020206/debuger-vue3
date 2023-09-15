@@ -1,5 +1,5 @@
-/*eslint-env node*/
-module.default = {
+/* eslint-env node */
+module.exports = {
   plugins: {
     tailwindcss: {},
     autoprefixer: {}
