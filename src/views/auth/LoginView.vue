@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import loginFormFunciton from '@/composables/auth/form';
+import loginFormFunciton from '@/composables/auth/login_form';
 
 const { loginFieldList, loginFormData, handleSubimt, loginOptions } =
   loginFormFunciton();

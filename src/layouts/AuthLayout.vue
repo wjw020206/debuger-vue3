@@ -12,6 +12,6 @@
 
 <style scoped lang="scss">
 .main {
-  @apply flex flex-col items-center h-screen bg-[#F1F2F3];
+  @apply flex flex-col items-center h-screen bg-[#F1F2F3] relative;
 }
 </style>

@@ -1,4 +1,5 @@
-import { checkAccount, checkPasswordIsNull } from '@/utils/validators';
+import validatorsFunction from '@/utils/validators';
+const { checkAccount, checkPasswordIsNull } = validatorsFunction();
 
 /**
  * 登录表单项
@@ -18,6 +19,7 @@ const loginFieldList: Form.FieldItem[] = [
     field: 'password',
     type: 'password',
     placeholder: '密码',
+    showPassword: true,
     rules: [
       {
         validator: checkPasswordIsNull,
@@ -53,5 +55,10 @@ export default function loginFormFunciton() {
   const handleSubimt = () => {
     console.log(loginFormData.value);
   };
-  return { loginFieldList, loginFormData, handleSubimt, loginOptions };
+  return {
+    loginFieldList,
+    loginFormData,
+    handleSubimt,
+    loginOptions
+  };
 }
