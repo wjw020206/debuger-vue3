@@ -1,5 +1,5 @@
 <script setup lang="ts"></script>
 
-<template>首页</template>
+<template>标签</template>
 
 <style scoped lang="scss"></style>

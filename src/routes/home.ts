@@ -6,8 +6,18 @@ export default {
   children: [
     {
       name: 'home',
-      path: '/',
+      path: '',
       component: () => import('@/views/home/HomeView.vue')
+    },
+    {
+      name: 'tags',
+      path: 'tags',
+      component: () => import('@/views/home/TagsView.vue')
+    },
+    {
+      name: 'users',
+      path: 'users',
+      component: () => import('@/views/home/UsersView.vue')
     }
   ]
 } as RouteRecordRaw;
