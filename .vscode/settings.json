@@ -16,5 +16,9 @@
   "explorer.confirmDragAndDrop": false,
   "editor.codeLens": false,
   "eslint.enable": true,
-  "scss.lint.unknownAtRules": "ignore"
+  "scss.lint.unknownAtRules": "ignore",
+  "cSpell.words": [
+    "debuger",
+    "Subimt"
+  ]
 }

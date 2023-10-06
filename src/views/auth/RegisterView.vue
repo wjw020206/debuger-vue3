@@ -1,8 +1,118 @@
 <script setup lang="ts">
-import registerFormFunciton from '@/composables/auth/register_form';
+import type { FormInstance, FormRules } from 'element-plus';
+import {
+  emailRegExp,
+  passwordRegExp,
+  verificationCodeRegExp
+} from '@/utils/validators';
 
-const { registerFieldList, registerFormData, registerOptions, handleSubimt } =
-  registerFormFunciton();
+interface RuleForm {
+  nickname: string;
+  email: string;
+  verificationCode: string;
+  password: string;
+  passwordTwo: string;
+}
+
+// 表单实例
+const ruleFormRef = ref<FormInstance>();
+
+// 表单数据
+const formData = reactive<RuleForm>({
+  nickname: '',
+  email: '',
+  verificationCode: '',
+  password: '',
+  passwordTwo: ''
+});
+
+// 表单校验规则
+const rules = reactive<FormRules<RuleForm>>({
+  nickname: [
+    {
+      validator: (rule: any, value: any, callback: any) => {
+        if (value === '') {
+          callback(new Error('昵称不能为空'));
+        } else {
+          callback();
+        }
+      },
+      trigger: 'change'
+    }
+  ],
+  email: [
+    {
+      validator: (rule: any, value: any, callback: any) => {
+        if (value === '') {
+          callback(new Error('邮箱不能为空'));
+        } else if (!emailRegExp.test(value)) {
+          callback(new Error('邮箱格式错误'));
+        } else {
+          callback();
+        }
+      },
+      trigger: 'change'
+    }
+  ],
+  verificationCode: [
+    {
+      validator: (rule: any, value: any, callback: any) => {
+        if (value === '') {
+          callback(new Error('验证码不能为空'));
+        } else if (!verificationCodeRegExp.test(value)) {
+          callback(new Error('验证码格式错误'));
+        } else {
+          callback();
+        }
+      },
+      trigger: 'change'
+    }
+  ],
+  password: [
+    {
+      validator: (rule: any, value: any, callback: any) => {
+        if (value === '') {
+          callback(new Error('密码不能为空'));
+        } else if (value.length < 8 || value.length > 20) {
+          callback(new Error('密码长度需为8到20位'));
+        } else if (!passwordRegExp.test(value)) {
+          callback(new Error('密码至少包含一个大小写字母、数字、特殊字符'));
+        } else {
+          callback();
+        }
+      },
+      trigger: 'change'
+    }
+  ],
+  passwordTwo: [
+    {
+      validator: (rule: any, value: any, callback: any) => {
+        if (value === '') {
+          callback(new Error('密码不能为空'));
+        } else if (value !== formData.password) {
+          callback(new Error('两次密码输入不一致'));
+        } else {
+          callback();
+        }
+      },
+      trigger: 'change'
+    }
+  ]
+});
+
+/**
+ * 提交表单
+ */
+const submitForm = (formEl: FormInstance | undefined) => {
+  if (!formEl) return;
+  formEl.validate(valid => {
+    if (valid) {
+      console.log(formData);
+    } else {
+      return false;
+    }
+  });
+};
 </script>
 
 <template>
@@ -38,12 +148,44 @@ const { registerFieldList, registerFormData, registerOptions, handleSubimt } =
     <div class="right-section">
       <div class="form">
         <h1>用户注册</h1>
-        <base-form
-          :filedList="registerFieldList"
-          :model="registerFormData"
-          :options="registerOptions"
-          @submit="handleSubimt"
-        ></base-form>
+        <el-form ref="ruleFormRef" :model="formData" :rules="rules">
+          <el-form-item prop="nickname">
+            <base-input placeholder="昵称" v-model="formData.nickname" />
+          </el-form-item>
+          <el-form-item prop="email">
+            <base-input placeholder="邮箱" v-model="formData.email" />
+          </el-form-item>
+          <el-form-item prop="verificationCode">
+            <base-input
+              placeholder="验证码"
+              v-model="formData.verificationCode"
+              :is-suffix="true"
+            >
+              <template #suffix>
+                <base-button :is-send-sms="true">获取验证码</base-button>
+              </template>
+            </base-input>
+          </el-form-item>
+          <el-form-item prop="password">
+            <base-input
+              type="password"
+              v-model="formData.password"
+              placeholder="请输入密码"
+              showPassword
+            />
+          </el-form-item>
+          <el-form-item prop="passwordTwo">
+            <base-input
+              type="password"
+              v-model="formData.passwordTwo"
+              placeholder="请再次输入密码"
+              showPassword
+            />
+          </el-form-item>
+          <base-button :is-submit="true" @click="submitForm(ruleFormRef)"
+            >注册</base-button
+          >
+        </el-form>
       </div>
 
       <p class="bottom-tip">
@@ -60,7 +202,7 @@ const { registerFieldList, registerFormData, registerOptions, handleSubimt } =
 
   // 左侧区域样式
   & > .left-section {
-    @apply flex flex-col;
+    @apply flex flex-col mt-[80px];
     & > .logo {
       @apply h-[80px];
     }
@@ -77,23 +219,15 @@ const { registerFieldList, registerFormData, registerOptions, handleSubimt } =
       & > h1 {
         @apply font-medium mb-[16px] text-[28px] text-center;
       }
-
-      :deep(.el-form) {
-        & > .el-form-item {
-          @apply mb-[20px];
-
-          & .submitBtn {
-            @apply w-full h-[46px] text-[20px];
-          }
-        }
+      // 提交按钮样式
+      & .submit-btn {
+        @apply w-full h-[46px] text-[20px] mt-[10px];
       }
-
       // 输入框样式
       :deep(.el-input__wrapper) {
         @apply h-[41.6px];
       }
     }
-
     // 底部提示文字
     & > .bottom-tip {
       @apply mt-[16px] text-[16px] text-center;
