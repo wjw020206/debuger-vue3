@@ -9,11 +9,13 @@ const searchValue = ref('');
     >
       <div class="flex w-[1140px] h-[40px] items-center gap-[30px]">
         <!-- logo -->
-        <img
-          src="@/assets/images/common/logo.png"
-          class="h-[30px]"
-          title="debuger"
-        />
+        <router-link to="/" class="shrink-0">
+          <img
+            src="@/assets/images/common/logo.png"
+            class="h-[30px]"
+            title="debuger"
+          />
+        </router-link>
         <!-- 搜索框 -->
         <base-input class="h-full" v-model="searchValue" :is-prefix="true">
           <template #prefix>
