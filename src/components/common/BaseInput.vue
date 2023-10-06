@@ -1,9 +1,11 @@
 <script setup lang="ts">
 interface Props {
   isSuffix?: boolean;
+  isPrefix?: boolean;
 }
 withDefaults(defineProps<Props>(), {
-  isSuffix: false
+  isSuffix: false,
+  isPrefix: false
 });
 </script>
 
@@ -11,6 +13,9 @@ withDefaults(defineProps<Props>(), {
   <el-input v-bind="$attrs" :class="{ 'suffix-style': isSuffix }">
     <template #suffix v-if="isSuffix">
       <slot name="suffix" />
+    </template>
+    <template #prefix v-if="isPrefix">
+      <slot name="prefix" />
     </template>
   </el-input>
 </template>

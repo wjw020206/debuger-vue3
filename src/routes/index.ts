@@ -1,2 +1,3 @@
 import auth from './auth';
-export default [auth];
+import home from './home';
+export default [home, auth];

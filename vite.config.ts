@@ -2,7 +2,9 @@ import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
+import IconsResolver from 'unplugin-icons/resolver';
 import Components from 'unplugin-vue-components/vite';
+import Icons from 'unplugin-icons/vite';
 import {
   ElementPlusResolver,
   VueUseComponentsResolver
@@ -30,20 +32,23 @@ export default defineConfig({
         ElementPlusResolver(),
         // Vue组件自动导入
         VueUseComponentsResolver(),
-        // 针对iconpark图标按需导入
-        componentName => {
-          if (componentName.startsWith('Icon')) {
-            return {
-              name: componentName.slice(4),
-              from: '@icon-park/vue-next'
-            };
+        // 图标自动导入
+        IconsResolver({
+          prefix: false,
+          enabledCollections: ['icon-park-outline'],
+          alias: {
+            park: 'icon-park-outline'
           }
-        }
+        })
       ],
       extensions: ['vue', 'ts'],
       dirs: ['src/components', 'src/layouts'],
       // 类型文件输出目录
       dts: 'src/types/components.d.ts'
+    }),
+    Icons({
+      autoInstall: true,
+      compiler: 'vue3'
     })
   ],
   resolve: {

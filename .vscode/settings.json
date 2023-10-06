@@ -17,8 +17,5 @@
   "editor.codeLens": false,
   "eslint.enable": true,
   "scss.lint.unknownAtRules": "ignore",
-  "cSpell.words": [
-    "debuger",
-    "Subimt"
-  ]
+  "cSpell.words": ["debuger", "pinia", "Subimt", "unplugin"]
 }
