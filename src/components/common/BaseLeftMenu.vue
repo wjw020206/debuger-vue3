@@ -2,8 +2,11 @@
 
 <template>
   <aside class="flex flex-col w-[91.66px] border-r border-[#d6d9dc]">
-    <router-link to="/" class="link" :class="{ active: $route.name === 'home' }"
-      >首页</router-link
+    <router-link
+      to="/"
+      class="link"
+      :class="{ active: $route.name === 'question' }"
+      >问题</router-link
     >
     <router-link
       to="/tags"
@@ -27,7 +30,8 @@
     @apply bg-[#f1f2f3] font-semibold relative;
     &::after {
       content: '';
-      @apply absolute w-[3px] h-full bg-blue-600 top-0 right-[-1px];
+      @apply absolute w-[3px] h-full top-0 right-[-1px];
+      background-color: $primary-color;
     }
   }
 }

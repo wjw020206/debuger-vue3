@@ -5,9 +5,9 @@ export default {
   component: () => import('@/layouts/HomeLayout.vue'),
   children: [
     {
-      name: 'home',
+      name: 'question',
       path: '',
-      component: () => import('@/views/home/HomeView.vue')
+      component: () => import('@/views/home/QuestionView.vue')
     },
     {
       name: 'tags',
