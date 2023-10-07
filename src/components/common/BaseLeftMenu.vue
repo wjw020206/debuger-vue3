@@ -1,26 +1,30 @@
 <script setup lang="ts"></script>
 
 <template>
-  <aside class="flex flex-col w-[91.66px] border-r border-[#d6d9dc]">
-    <router-link
-      to="/"
-      class="link"
-      :class="{ active: $route.name === 'question' }"
-      >问题</router-link
+  <div class="h-full w-[91.66px]">
+    <aside
+      class="fixed top-[81px] bottom-0 flex flex-col w-[91.66px] border-r border-[#d6d9dc]"
     >
-    <router-link
-      to="/tags"
-      class="link"
-      :class="{ active: $route.name === 'tags' }"
-      >标签</router-link
-    >
-    <router-link
-      to="/users"
-      class="link"
-      :class="{ active: $route.name === 'users' }"
-      >用户</router-link
-    >
-  </aside>
+      <router-link
+        to="/question"
+        class="link"
+        :class="{ active: $route.path.includes('question') }"
+        >问答</router-link
+      >
+      <router-link
+        :to="{ name: 'tags' }"
+        class="link"
+        :class="{ active: $route.name === 'tags' }"
+        >标签</router-link
+      >
+      <router-link
+        :to="{ name: 'users' }"
+        class="link"
+        :class="{ active: $route.name === 'users' }"
+        >用户</router-link
+      >
+    </aside>
+  </div>
 </template>
 
 <style scoped lang="scss">

@@ -5,7 +5,7 @@ const searchValue = ref('');
 <template>
   <header class="h-[57px] w-screen">
     <div
-      class="fixed right-0 left-0 top-0 flex justify-center shadow-md py-[8px]"
+      class="fixed z-[999] right-0 left-0 top-0 flex justify-center shadow-md py-[8px] bg-[#fff]"
     >
       <div class="flex w-[1140px] h-[40px] items-center gap-[30px]">
         <!-- logo -->

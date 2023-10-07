@@ -6,13 +6,13 @@
     <div
       class="absolute top-[57px] left-0 bottom-0 right-0 flex justify-center"
     >
-      <div class="w-[1140px] h-full pt-[24px] flex">
+      <div class="w-[1140px] h-full pt-[24px] flex gap-[20px]">
         <base-left-menu />
-        <router-view v-slot="{ Component, route }">
+        <RouterView v-slot="{ Component, route }">
           <template v-if="Component">
             <component :is="Component" :key="route.fullPath" />
           </template>
-        </router-view>
+        </RouterView>
       </div>
     </div>
   </div>

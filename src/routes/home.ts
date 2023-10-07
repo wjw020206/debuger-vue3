@@ -6,8 +6,25 @@ export default {
   children: [
     {
       name: 'question',
-      path: '',
-      component: () => import('@/views/home/QuestionView.vue')
+      path: '/question',
+      component: () => import('@/views/home/question/QuestionView.vue'),
+      children: [
+        {
+          name: 'newest',
+          path: '',
+          component: () => import('@/views/home/question/NewestView.vue')
+        },
+        {
+          name: 'push-me',
+          path: 'push-me',
+          component: () => import('@/views/home/question/PushMe.vue')
+        },
+        {
+          name: 'unanswered',
+          path: 'unanswered',
+          component: () => import('@/views/home/question/UnansweredView.vue')
+        }
+      ]
     },
     {
       name: 'tags',
