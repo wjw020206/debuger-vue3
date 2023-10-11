@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="main">
+  <div class="flex flex-col items-center h-screen bg-[#FFF] relative">
     <base-header />
     <div
       class="absolute top-[57px] left-0 bottom-0 right-0 flex justify-center"
@@ -18,8 +18,4 @@
   </div>
 </template>
 
-<style scoped lang="scss">
-.main {
-  @apply flex flex-col items-center h-screen bg-[#FFF] relative;
-}
-</style>
+<style scoped lang="scss"></style>

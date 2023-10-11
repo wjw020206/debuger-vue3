@@ -11,7 +11,7 @@ export default {
   children: [
     {
       name: 'question',
-      path: '/question',
+      path: 'question',
       component: () => import('@/views/home/question/QuestionView.vue'),
       children: [
         {

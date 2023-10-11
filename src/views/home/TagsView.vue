@@ -13,7 +13,11 @@ const tagName = ref('');
     <!-- 搜索区域 -->
     <div class="flex justify-between h-[40px] mb-[24px]">
       <!-- 文本框 -->
-      <base-input v-model="tagName" placeholder="搜索标签" class="search-tag" />
+      <base-input
+        v-model="tagName"
+        placeholder="搜索标签"
+        class="search-input"
+      />
       <!-- 筛选按钮 -->
       <div class="border border-slate-400 flex cursor-pointer rounded-sm">
         <div
@@ -60,18 +64,13 @@ const tagName = ref('');
       </div>
     </div>
     <div class="flex justify-center items-center py-[24px]">
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="800"
-        class="self-end"
-      />
+      <base-pagination />
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.search-tag {
+.search-input {
   @apply w-[220px];
 }
 </style>
