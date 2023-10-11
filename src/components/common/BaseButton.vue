@@ -12,6 +12,7 @@ withDefaults(defineProps<Props>(), {
 <template>
   <el-button
     v-bind="$attrs"
+    :color="isSubmit ? '#3b82f6' : ''"
     :class="{ 'submit-btn': isSubmit, 'send-sms-btn': isSendSms }"
   >
     <slot name="default" />
@@ -21,8 +22,7 @@ withDefaults(defineProps<Props>(), {
 <style scoped lang="scss">
 // 提交按钮样式
 .submit-btn {
-  @apply hover:bg-blue-600 text-white rounded-md;
-  background-color: $primary-color;
+  @apply text-white rounded-md;
 }
 
 // 获取验证码按钮样式
