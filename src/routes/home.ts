@@ -3,6 +3,11 @@ import type { RouteRecordRaw } from 'vue-router';
 export default {
   path: '/',
   component: () => import('@/layouts/HomeLayout.vue'),
+  redirect: () => {
+    return {
+      path: '/question'
+    };
+  },
   children: [
     {
       name: 'question',
