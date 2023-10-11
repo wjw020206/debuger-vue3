@@ -23,6 +23,11 @@ export default {
           name: 'unanswered',
           path: 'unanswered',
           component: () => import('@/views/home/question/UnansweredView.vue')
+        },
+        {
+          name: 'detail',
+          path: 'detail',
+          component: () => import('@/views/home/question/QuestionDetail.vue')
         }
       ]
     },

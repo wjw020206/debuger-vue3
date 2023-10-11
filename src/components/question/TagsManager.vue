@@ -9,37 +9,37 @@
       </div>
       <!-- 标签容器 -->
       <div class="flex gap-[1px] flex-wrap">
-        <span
+        <base-tag
           class="text-[14px] bg-blue-200 px-[6px] mr-[4px] mt-[4px] text-blue-600 cursor-pointer rounded-sm"
-          >typescript</span
+          >typescript</base-tag
         >
-        <span
+        <base-tag
           class="text-[14px] bg-blue-200 px-[6px] mr-[4px] mt-[4px] text-blue-600 cursor-pointer rounded-sm"
-          >HTML</span
+          >HTML</base-tag
         >
-        <span
+        <base-tag
           class="text-[14px] bg-blue-200 px-[6px] mr-[4px] mt-[4px] text-blue-600 cursor-pointer rounded-sm"
-          >CSS</span
+          >CSS</base-tag
         >
-        <span
+        <base-tag
           class="text-[14px] bg-blue-200 px-[6px] mr-[4px] mt-[4px] text-blue-600 cursor-pointer rounded-sm"
-          >Vuejs</span
+          >Vuejs</base-tag
         >
-        <span
+        <base-tag
           class="text-[14px] bg-blue-200 px-[6px] mr-[4px] mt-[4px] text-blue-600 cursor-pointer rounded-sm"
-          >Nestjs</span
+          >Nestjs</base-tag
         >
-        <span
+        <base-tag
           class="text-[14px] bg-blue-200 px-[6px] mr-[4px] mt-[4px] text-blue-600 cursor-pointer rounded-sm"
-          >javascript</span
+          >javascript</base-tag
         >
-        <span
+        <base-tag
           class="text-[14px] bg-blue-200 px-[6px] mr-[4px] mt-[4px] text-blue-600 cursor-pointer rounded-sm"
-          >React</span
+          >React</base-tag
         >
-        <span
+        <base-tag
           class="text-[14px] bg-blue-200 px-[6px] mr-[4px] mt-[4px] text-blue-600 cursor-pointer rounded-sm"
-          >Nodejs</span
+          >Nodejs</base-tag
         >
       </div>
     </div>

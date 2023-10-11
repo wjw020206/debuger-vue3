@@ -32,15 +32,15 @@
     <div class="question w-full">
       <router-link
         :to="{
-          path: `/detail`
+          path: `/question/detail`
         }"
         >Typescript 能否提高性能或者稳定性 ？</router-link
       >
       <div class="flex items-end justify-between">
         <!-- 标签区域 -->
         <div class="flex gap-[1px]">
-          <span class="tag">typescript</span>
-          <span class="tag">前端</span>
+          <base-tag class="tag">typescript</base-tag>
+          <base-tag class="tag">前端</base-tag>
         </div>
 
         <!-- 回答者与作者显示区域 -->

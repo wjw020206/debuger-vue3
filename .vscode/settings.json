@@ -17,5 +17,17 @@
   "editor.codeLens": false,
   "eslint.enable": true,
   "scss.lint.unknownAtRules": "ignore",
-  "cSpell.words": ["debuger", "pinia", "Subimt", "unplugin"]
+  "cSpell.words": [
+    "debuger",
+    "highlightjs",
+    "iconify",
+    "kangc",
+    "pinia",
+    "prismjs",
+    "Subimt",
+    "unplugin",
+    "Vite",
+    "Vuejs",
+    "vuepress"
+  ]
 }

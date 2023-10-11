@@ -23,13 +23,13 @@
         >待回答</router-link
       >
     </div>
-    <base-button :is-submit="true" class="ask-questions">提问题</base-button>
+    <base-button :is-submit="true" class="ask-questions"> 提问题 </base-button>
   </div>
 </template>
 
 <style scoped lang="scss">
-.ask-questions {
-  @apply rounded-sm w-[72px] h-[36px] text-[16px] border-none;
+:deep(.ask-questions) {
+  @apply rounded-md w-[72px] h-[36px] text-[16px] border-none;
 }
 
 .text {
