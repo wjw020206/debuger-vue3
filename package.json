@@ -7,9 +7,23 @@
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
+    "type-check": "vue-tsc --noEmit --skipLibCheck -p tsconfig.app.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "format": "prettier --write .",
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm type-check && pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json,md}": [
+      "prettier --write"
+    ],
+    "*.{vue,ts,tsx}": [
+      "eslint",
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@kangc/v-md-editor": "^2.3.17",
@@ -35,10 +49,12 @@
     "autoprefixer": "^10.4.15",
     "eslint": "^8.46.0",
     "eslint-plugin-vue": "^9.16.1",
+    "lint-staged": "^14.0.1",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.29",
     "prettier": "^3.0.0",
     "sass": "^1.66.1",
+    "simple-git-hooks": "^2.9.0",
     "tailwindcss": "^3.3.3",
     "typescript": "~5.1.6",
     "unplugin-auto-import": "^0.16.6",

@@ -1,8 +1,18 @@
 {
   "recommendations": [
-    "Vue.volar",
-    "Vue.vscode-typescript-vue-plugin",
+    "vue.vscode-typescript-vue-plugin",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "christian-kohler.path-intellisense",
+    "bradlc.vscode-tailwindcss",
+    "mhutchie.git-graph",
+    "streetsidesoftware.code-spell-checker",
+    "formulahendry.auto-rename-tag",
+    "formulahendry.auto-close-tag",
+    "yoavbls.pretty-ts-errors",
+    "meganrogge.template-string-converter",
+    "eamodio.gitlens",
+    "kisstkondoros.vscode-gutter-preview",
+    "redjue.git-commit-plugin"
   ]
 }
