@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import EditorPersonDialog from '@/components/account/EditorPersonDialog.vue';
+import BaseSwitch from '@/components/common/BaseSwitch.vue';
+
 /**头像 */
 const face = ref('/src/assets/images/common/avatar.jpg');
 const errorHandler = () => true;
@@ -8,11 +11,29 @@ const userName = ref('Http');
 const addTime = ref('2023-10-11');
 /**获赞数 */
 const praise = ref(0);
+
+const switchList = ref([
+  {
+    text: '主页'
+  },
+  { text: '回答' },
+  { text: '提问' },
+  { text: '关注' }
+]);
+
+const dialogRef = ref<InstanceType<typeof EditorPersonDialog> | null>();
+const switchRef = ref<InstanceType<typeof BaseSwitch> | null>();
+const editorPerson = () => {
+  dialogRef.value!.dialogVisible = true;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const toggle = (index: number) => {};
 </script>
 
 <template>
-  <div class="flex h-full">
-    <div class="face-content">
+  <div class="flex h-full w-full">
+    <div class="face-content flex-shrink-0">
       <div>
         <el-row>
           <el-col>
@@ -40,14 +61,31 @@ const praise = ref(0);
         </div>
       </div>
       <div class="flex flex-col w-[259px] mt-[10px]">
-        <base-button class="btn-editor-person">编辑个人资料</base-button>
+        <base-button class="btn-editor-person" @click="editorPerson"
+          >编辑个人资料</base-button
+        >
         <div class="flex w-full mt-[10px]">
           <div class="add-time">{{ addTime }}加入</div>
         </div>
       </div>
     </div>
-    <div>aa</div>
+    <div class="w-full flex flex-col">
+      <div class="flex justify-center">
+        <base-switch
+          :switchList="switchList"
+          @change="toggle"
+          ref="switchRef"
+        />
+      </div>
+      <div class="content mt-[20px] ml-[20px]">
+        <account-homepage v-if="switchRef?.currentIndex === 0" />
+        <account-question v-else-if="switchRef?.currentIndex === 1" />
+        <account-answer v-else-if="switchRef?.currentIndex === 2" />
+        <account-follow v-else-if="switchRef?.currentIndex === 3" />
+      </div>
+    </div>
   </div>
+  <editor-person-dialog ref="dialogRef" />
 </template>
 
 <style scoped lang="scss">
