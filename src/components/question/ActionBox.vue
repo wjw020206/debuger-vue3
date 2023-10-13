@@ -1,28 +1,24 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const switchList = [
+  {
+    name: 'newest',
+    text: '最新'
+  },
+  {
+    name: 'push-me',
+    text: '为我推送'
+  },
+  {
+    name: 'unanswered',
+    text: '待回答'
+  }
+];
+</script>
 
 <template>
   <div class="flex w-full justify-between">
     <h1 class="font-medium text-[24px]">问答</h1>
-    <div class="flex">
-      <router-link
-        :to="{ name: 'newest' }"
-        class="text"
-        :class="{ active: $route.name === 'newest' }"
-        >最新</router-link
-      >
-      <router-link
-        :to="{ name: 'push-me' }"
-        class="text"
-        :class="{ active: $route.name === 'push-me' }"
-        >为我推送</router-link
-      >
-      <router-link
-        :to="{ name: 'unanswered' }"
-        class="text"
-        :class="{ active: $route.name === 'unanswered' }"
-        >待回答</router-link
-      >
-    </div>
+    <base-switch :switchList="switchList" :isRouter="true"></base-switch>
     <base-button
       :is-submit="true"
       class="ask-questions"
@@ -36,18 +32,5 @@
 <style scoped lang="scss">
 :deep(.ask-questions) {
   @apply rounded-md w-[72px] h-[36px] text-[16px] border-none;
-}
-
-.text {
-  @apply py-[6px] px-[12px] cursor-pointer;
-}
-
-.active {
-  @apply font-semibold relative;
-  &::after {
-    content: '';
-    @apply absolute h-[3px] w-full bottom-0 right-[-1px];
-    background-color: $primary-color;
-  }
 }
 </style>
