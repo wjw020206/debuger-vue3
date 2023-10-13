@@ -27,6 +27,7 @@ const searchValue = ref('');
         <img
           src="@/assets/images/common/avatar.jpg"
           class="w-[30px] h-[30px] cursor-pointer"
+          @click="$router.push({ name: 'MyAccount' })"
         />
         <el-icon size="30" color="#000" class="cursor-pointer">
           <park-folder-focus-one />
