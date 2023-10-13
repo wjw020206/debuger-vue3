@@ -23,7 +23,13 @@
         >待回答</router-link
       >
     </div>
-    <base-button :is-submit="true" class="ask-questions"> 提问题 </base-button>
+    <base-button
+      :is-submit="true"
+      class="ask-questions"
+      @click="$router.push({ name: 'askQuestion' })"
+    >
+      提问题
+    </base-button>
   </div>
 </template>
 

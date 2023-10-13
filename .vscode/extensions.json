@@ -13,6 +13,7 @@
     "meganrogge.template-string-converter",
     "eamodio.gitlens",
     "kisstkondoros.vscode-gutter-preview",
-    "redjue.git-commit-plugin"
+    "redjue.git-commit-plugin",
+    "mrmlnc.vscode-scss"
   ]
 }

@@ -20,6 +20,7 @@
   "scss.lint.unknownAtRules": "ignore",
   "git-graph.dialog.fetchRemote.prune": true,
   "cSpell.words": [
+    "Componet",
     "debuger",
     "highlightjs",
     "iconify",

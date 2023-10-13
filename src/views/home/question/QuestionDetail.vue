@@ -98,7 +98,7 @@ const text2 =
     <div class="w-[748px] mt-[20px]">
       <div class="py-[8px] px-[32px] flex justify-between items-center">
         <h1 class="font-bold text-[16px]">1个回答</h1>
-        <div class="flex border border-[#3b82f6] rounded-sm overflow-hidden">
+        <div class="flex border border-[#3b82f6] rounded-sm">
           <base-button text class="filter-btn">得票</base-button>
           <base-button text class="filter-btn">最新</base-button>
         </div>
@@ -131,15 +131,12 @@ const text2 =
 .ask-questions {
   @apply rounded-sm w-[72px] h-[36px] text-[16px] border-none;
 }
-
 .text-status {
   @apply text-[#6a737c] text-[13px];
 }
-
 :deep(.github-markdown-body) {
   @apply pb-[0];
 }
-
 .collect-btn {
   @apply w-[64px] h-[30px] border gap-[10px];
   color: $primary-color;
@@ -149,12 +146,10 @@ const text2 =
     color: #fff;
   }
 }
-
 .icon {
   @apply mr-[5px] cursor-pointer;
   color: $primary-color;
 }
-
 .filter-btn {
   @apply m-0;
   color: $primary-color;
@@ -164,7 +159,6 @@ const text2 =
     color: #fff;
   }
 }
-
 .submit-answer {
   @apply w-[89px] h-[37px] text-white;
 }
