@@ -53,11 +53,11 @@ const toggle = (index: number) => {};
         </div>
         <div class="number-style">
           <div>{{ praise }}</div>
-          <div style="color: #6c757d">获赞数</div>
+          <div style="color: #6c757d">关注数</div>
         </div>
         <div class="number-style">
           <div>{{ praise }}</div>
-          <div style="color: #6c757d">获赞数</div>
+          <div style="color: #6c757d">粉丝数</div>
         </div>
       </div>
       <div class="flex flex-col w-[259px] mt-[10px]">
