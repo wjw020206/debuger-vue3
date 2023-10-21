@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import type { FormInstance, FormRules } from 'element-plus';
+import { ElMessage, type FormInstance, type FormRules } from 'element-plus';
 import { emailRegExp } from '@/utils/validators';
+import { login } from '@/apis/authApi';
+import userStorage from '@/utils/userStorage';
+import { CacheEnum } from '@/enums/CacheEnum';
+import router from '@/plugins/router';
 
 interface RuleForm {
   email: string;
@@ -51,9 +55,12 @@ const rules = reactive<FormRules<RuleForm>>({
  */
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  formEl.validate(valid => {
+  formEl.validate(async valid => {
     if (valid) {
-      console.log(formData);
+      const { token } = await login(formData);
+      userStorage().set(CacheEnum.TOKEN_NAME, token);
+      ElMessage.success('登录成功');
+      router.push({ name: 'question' });
     } else {
       return false;
     }

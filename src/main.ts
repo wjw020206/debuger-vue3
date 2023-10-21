@@ -1,4 +1,5 @@
 import '@/assets/styles/base.scss';
+import 'element-plus/dist/index.css';
 import { createApp } from 'vue';
 import App from './App.vue';
 import register from './plugins';

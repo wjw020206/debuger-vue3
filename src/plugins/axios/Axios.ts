@@ -1,7 +1,9 @@
+import userStorage from '@/utils/userStorage';
 import axios, {
   type AxiosRequestConfig,
   type InternalAxiosRequestConfig
 } from 'axios';
+import { ElMessage } from 'element-plus';
 
 export default class Axios {
   private instance;
@@ -16,8 +18,17 @@ export default class Axios {
   /**
    * 请求方法
    */
-  public request(config: AxiosRequestConfig) {
-    return this.instance.request(config);
+  public request<T>(config: AxiosRequestConfig) {
+    return new Promise((resolve, reject) => {
+      (async () => {
+        try {
+          const { data } = await this.instance.request<T>(config);
+          resolve(data);
+        } catch (error) {
+          reject(error);
+        }
+      })();
+    }) as Promise<T>;
   }
 
   /**
@@ -36,7 +47,10 @@ export default class Axios {
       (config: InternalAxiosRequestConfig) => {
         // 设置请求体数据格式
         config.headers.Accept = 'application/json';
-
+        // 设置请求token
+        config.headers.Authorization = `Bearer ${userStorage().get(
+          CacheEnum.TOKEN_NAME
+        )}`;
         return config;
       },
       error => {
@@ -54,6 +68,10 @@ export default class Axios {
         return response;
       },
       error => {
+        ElMessage.error(
+          error.response.data.message[error.response.data.message.length - 1]
+            .message ?? error.message
+        );
         return Promise.reject(error);
       }
     );
