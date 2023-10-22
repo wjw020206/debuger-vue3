@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import type { FormInstance, FormRules } from 'element-plus';
+import { ElMessage, type FormInstance, type FormRules } from 'element-plus';
 import {
   emailRegExp,
   passwordRegExp,
   verificationCodeRegExp
 } from '@/utils/validators';
+import { register } from '@/apis/authApi';
+import router from '@/plugins/router';
 
 interface RuleForm {
   nickname: string;
   email: string;
   verificationCode: string;
   password: string;
-  passwordTwo: string;
+  passwordConfirmation: string;
 }
 
 // 表单实例
@@ -23,7 +25,7 @@ const formData = reactive<RuleForm>({
   email: '',
   verificationCode: '',
   password: '',
-  passwordTwo: ''
+  passwordConfirmation: ''
 });
 
 // 表单校验规则
@@ -84,7 +86,7 @@ const rules = reactive<FormRules<RuleForm>>({
       trigger: 'change'
     }
   ],
-  passwordTwo: [
+  passwordConfirmation: [
     {
       validator: (rule: any, value: any, callback: any) => {
         if (value === '') {
@@ -105,9 +107,16 @@ const rules = reactive<FormRules<RuleForm>>({
  */
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  formEl.validate(valid => {
+  formEl.validate(async valid => {
     if (valid) {
-      console.log(formData);
+      const { password, nickname, email } = formData;
+      await register({
+        password,
+        nickname,
+        email
+      });
+      ElMessage.success('注册成功');
+      router.push({ name: 'login' });
     } else {
       return false;
     }
@@ -174,10 +183,10 @@ const submitForm = (formEl: FormInstance | undefined) => {
               showPassword
             />
           </el-form-item>
-          <el-form-item prop="passwordTwo">
+          <el-form-item prop="passwordConfirmation">
             <base-input
               type="password"
-              v-model="formData.passwordTwo"
+              v-model="formData.passwordConfirmation"
               placeholder="请再次输入密码"
               showPassword
             />

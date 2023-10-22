@@ -15,7 +15,7 @@ export async function login(data: { email: string; password: string }) {
  * 注册
  */
 export async function register(data: {
-  name: string;
+  nickname: string;
   email: string;
   password: string;
 }) {
