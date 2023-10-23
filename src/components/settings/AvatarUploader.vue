@@ -51,7 +51,8 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = async rawFile => {
 const uploadHandle = async () => {
   const newData = newFile;
   const { path } = await uploadImage(newData);
-  imageUrl.value = path;
+
+  imageUrl.value = `\\${path}`;
 };
 
 defineExpose({
@@ -60,21 +61,22 @@ defineExpose({
 </script>
 
 <template>
-  <el-upload
-    class="avatar-uploader"
-    action=""
-    :show-file-list="false"
-    :before-upload="beforeAvatarUpload"
-    :http-request="uploadHandle"
-    accept="image/jpeg,image/png"
-  >
-    <img
-      v-if="imageUrl"
-      :src="imageUrl"
-      class="w-[80px] h-[80px] block rounded-[50%]"
-    />
-    <el-icon v-else class="avatar-uploader-icon"><park-plus /></el-icon>
-  </el-upload>
+  <div class="flex">
+    <img :src="imageUrl" class="w-[96px] h-[96px] block rounded-[50%]" />
+    <el-upload
+      class="avatar-uploader"
+      action=""
+      :show-file-list="false"
+      :before-upload="beforeAvatarUpload"
+      :http-request="uploadHandle"
+      accept="image/jpeg,image/png"
+    >
+      <template #trigger>
+        <div class="upload-btn">上传图片</div>
+      </template>
+      <template #tip>支持 jpg/jpeg/png 格式</template>
+    </el-upload>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -89,6 +91,17 @@ defineExpose({
 }
 
 .avatar-uploader {
-  height: 80px;
+  @apply ml-[16px] flex flex-col justify-center;
+  :deep(.el-upload--text) {
+    @apply justify-start;
+  }
+}
+
+.upload-btn {
+  @apply w-[74px] h-[30px] text-[14px] flex border border-[#3b82f6] rounded-sm justify-center items-center text-[#3b82f6];
+  &:hover {
+    background-color: $primary-color;
+    color: #fff;
+  }
 }
 </style>

@@ -7,4 +7,6 @@ interface User {
   createAt: string;
   updateAt: string;
   birthday: string;
+  website: string;
+  introduction: string;
 }

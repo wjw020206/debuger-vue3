@@ -42,7 +42,11 @@ const toggle = (index: number) => {};
         </div>
       </div>
       <div class="flex flex-col w-[259px] mt-[10px]">
-        <base-button class="btn-editor-person">编辑个人资料</base-button>
+        <base-button
+          class="btn-editor-person"
+          @click="$router.push({ name: 'profile' })"
+          >编辑个人资料</base-button
+        >
         <div class="flex w-full mt-[10px]">
           <div class="add-time">
             {{ dayjs(userInfo?.createAt).format('YYYY-MM-DD') }}加入

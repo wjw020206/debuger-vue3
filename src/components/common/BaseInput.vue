@@ -10,7 +10,11 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <el-input v-bind="$attrs" :class="{ 'suffix-style': isSuffix }">
+  <el-input
+    v-bind="$attrs"
+    :class="{ 'suffix-style': isSuffix }"
+    class="base-input"
+  >
     <template #suffix v-if="isSuffix">
       <slot name="suffix" />
     </template>
@@ -30,6 +34,18 @@ withDefaults(defineProps<Props>(), {
     }
     & > .el-input__inner {
       @apply text-black;
+    }
+  }
+}
+
+.base-input {
+  --el-input-border-color: #94a3b8;
+  box-shadow: none;
+  :deep(.el-textarea__inner) {
+    @apply text-black text-[16px];
+    &:focus {
+      @apply border border-solid border-[#6bbbf7];
+      box-shadow: rgba(0, 116, 204, 0.15) 0px 0px 0px 4px;
     }
   }
 }
