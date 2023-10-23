@@ -1,14 +1,9 @@
 <script setup lang="ts">
-import EditorPersonDialog from '@/components/account/EditorPersonDialog.vue';
 import BaseSwitch from '@/components/common/BaseSwitch.vue';
+import dayjs from 'dayjs';
 
-/**头像 */
-const face = ref('/src/assets/images/common/avatar.jpg');
-const errorHandler = () => true;
-/**用户姓名 */
-const userName = ref('Http');
-/**加入时间 */
-const addTime = ref('2023-10-11');
+const { userInfo } = useUserStore();
+
 /**获赞数 */
 const praise = ref(0);
 
@@ -21,11 +16,7 @@ const switchList = ref([
   { text: '关注' }
 ]);
 
-const dialogRef = ref<InstanceType<typeof EditorPersonDialog> | null>();
-const switchRef = ref<InstanceType<typeof BaseSwitch> | null>();
-const editorPerson = () => {
-  dialogRef.value!.dialogVisible = true;
-};
+const switchRef = ref<InstanceType<typeof BaseSwitch> | null>(null);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const toggle = (index: number) => {};
@@ -34,18 +25,8 @@ const toggle = (index: number) => {};
 <template>
   <div class="flex h-full w-full">
     <div class="face-content flex-shrink-0">
-      <div>
-        <el-row>
-          <el-col>
-            <div>
-              <el-avatar :size="150" :src="face" @error="errorHandler">
-                <img src="@/assets/images/common/err_img.png" />
-              </el-avatar>
-            </div>
-          </el-col>
-        </el-row>
-      </div>
-      <div style="font-size: 28px">{{ userName }}</div>
+      <el-avatar :size="150" :src="userInfo?.avatar" />
+      <div style="font-size: 28px">{{ userInfo?.nickname }}</div>
       <div class="flex gap-[50px] mt-[10px] mb-[20px]">
         <div class="number-style">
           <div>{{ praise }}</div>
@@ -61,11 +42,11 @@ const toggle = (index: number) => {};
         </div>
       </div>
       <div class="flex flex-col w-[259px] mt-[10px]">
-        <base-button class="btn-editor-person" @click="editorPerson"
-          >编辑个人资料</base-button
-        >
+        <base-button class="btn-editor-person">编辑个人资料</base-button>
         <div class="flex w-full mt-[10px]">
-          <div class="add-time">{{ addTime }}加入</div>
+          <div class="add-time">
+            {{ dayjs(userInfo?.createAt).format('YYYY-MM-DD') }}加入
+          </div>
         </div>
       </div>
     </div>
@@ -79,35 +60,27 @@ const toggle = (index: number) => {};
       </div>
       <div class="content mt-[20px] ml-[20px]">
         <account-homepage v-if="switchRef?.currentIndex === 0" />
-        <account-question v-else-if="switchRef?.currentIndex === 1" />
-        <account-answer v-else-if="switchRef?.currentIndex === 2" />
+        <account-answer v-else-if="switchRef?.currentIndex === 1" />
+        <account-question v-else-if="switchRef?.currentIndex === 2" />
         <account-follow v-else-if="switchRef?.currentIndex === 3" />
       </div>
     </div>
   </div>
-  <editor-person-dialog ref="dialogRef" />
 </template>
 
 <style scoped lang="scss">
 .face-content {
-  @apply h-[500px] w-[350px] flex items-center justify-center flex-col;
+  @apply h-[500px] w-[350px] flex items-center justify-center flex-col rounded-md;
   border-width: 2px;
-  border-radius: 25px;
-
-  .cell {
-    @apply w-[120px];
-  }
-
   .btn-editor-person {
-    @apply w-[259px] h-[38px];
+    @apply w-[259px] h-[38px] rounded-md;
     border-width: 0.8px;
-    border-radius: 10px;
     border-color: #3b82f6;
     color: #3b82f6;
   }
   .add-time {
     color: #6c757d;
-    font-size: 13px;
+    font-size: 16px;
   }
   .number-style {
     @apply flex flex-col items-center;

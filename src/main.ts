@@ -31,6 +31,9 @@ import 'codemirror/addon/scroll/simplescrollbars';
 import 'codemirror/addon/scroll/simplescrollbars.css';
 // style
 import 'codemirror/lib/codemirror.css';
+import ElementPlus from 'element-plus';
+import zhCn from 'element-plus/es/locale/lang/zh-cn';
+import 'dayjs/locale/zh-cn';
 
 VMdEditor.Codemirror = Codemirror;
 
@@ -45,6 +48,10 @@ VMdPreview.use(githubTheme, {
 const app = createApp(App);
 
 register(app);
+
+app.use(ElementPlus, {
+  locale: zhCn
+});
 
 app.use(VMdPreview);
 app.use(VMdEditor);

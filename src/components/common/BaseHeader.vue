@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import useStorage from '@/utils/useStorage';
+
+const { get } = useStorage();
 const searchValue = ref('');
 </script>
 
@@ -24,14 +27,26 @@ const searchValue = ref('');
             </el-icon>
           </template>
         </base-input>
-        <img
-          src="@/assets/images/common/avatar.jpg"
-          class="w-[30px] h-[30px] cursor-pointer"
-          @click="$router.push({ name: 'MyAccount' })"
-        />
-        <el-icon size="30" color="#000" class="cursor-pointer">
-          <park-folder-focus-one />
-        </el-icon>
+        <template v-if="get(CacheEnum.TOKEN_NAME) !== null">
+          <img
+            :src="useUserStore().userInfo?.avatar"
+            class="w-[30px] h-[30px] cursor-pointer"
+            @click="$router.push({ name: 'MyAccount' })"
+          />
+          <el-icon size="30" color="#000" class="cursor-pointer">
+            <park-folder-focus-one />
+          </el-icon>
+        </template>
+        <div class="flex" v-else>
+          <base-button color="#3b82f6" @click="$router.push({ name: 'login' })"
+            >登录</base-button
+          >
+          <base-button
+            color="#3b82f6"
+            @click="$router.push({ name: 'register' })"
+            >注册</base-button
+          >
+        </div>
       </div>
     </div>
   </header>

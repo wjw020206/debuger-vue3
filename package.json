@@ -28,7 +28,9 @@
   "dependencies": {
     "@kangc/v-md-editor": "^2.3.17",
     "axios": "^1.5.0",
+    "browser-image-compression": "^2.0.2",
     "codemirror": "5",
+    "dayjs": "^1.11.10",
     "element-plus": "^2.3.12",
     "highlight.js": "^11.9.0",
     "normalize.css": "^8.0.1",

@@ -1,4 +1,4 @@
-import userStorage from '@/utils/userStorage';
+import useStorage from '@/utils/useStorage';
 import axios, {
   type AxiosRequestConfig,
   type InternalAxiosRequestConfig
@@ -48,7 +48,7 @@ export default class Axios {
         // 设置请求体数据格式
         config.headers.Accept = 'application/json';
         // 设置请求token
-        config.headers.Authorization = `Bearer ${userStorage().get(
+        config.headers.Authorization = `Bearer ${useStorage().get(
           CacheEnum.TOKEN_NAME
         )}`;
         return config;

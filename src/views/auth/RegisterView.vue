@@ -5,7 +5,7 @@ import {
   passwordRegExp,
   verificationCodeRegExp
 } from '@/utils/validators';
-import { register } from '@/apis/authApi';
+import { register } from '@/apis/userApi';
 import router from '@/plugins/router';
 
 interface RuleForm {
@@ -128,7 +128,9 @@ const submitForm = (formEl: FormInstance | undefined) => {
   <div class="content">
     <!-- 左侧区域 -->
     <div class="left-section">
-      <img src="@/assets/images/common/logo.png" class="logo" />
+      <router-link :to="{ path: '/' }">
+        <img src="@/assets/images/common/logo.png" class="logo" />
+      </router-link>
       <h1 class="title">加入Debuger社区</h1>
       <p class="text-[18px] mb-[15px] flex">
         <icon-thinking-problem
@@ -212,7 +214,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
   // 左侧区域样式
   & > .left-section {
     @apply flex flex-col mt-[80px];
-    & > .logo {
+    & .logo {
       @apply h-[80px];
     }
     & > .title {

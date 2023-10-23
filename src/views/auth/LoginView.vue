@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ElMessage, type FormInstance, type FormRules } from 'element-plus';
 import { emailRegExp } from '@/utils/validators';
-import { login } from '@/apis/authApi';
-import userStorage from '@/utils/userStorage';
+import { login } from '@/apis/userApi';
+import useStorage from '@/utils/useStorage';
 import { CacheEnum } from '@/enums/CacheEnum';
 import router from '@/plugins/router';
 
@@ -58,9 +58,9 @@ const submitForm = (formEl: FormInstance | undefined) => {
   formEl.validate(async valid => {
     if (valid) {
       const { token } = await login(formData);
-      userStorage().set(CacheEnum.TOKEN_NAME, token);
+      useStorage().set(CacheEnum.TOKEN_NAME, token);
       ElMessage.success('登录成功');
-      router.push({ name: 'question' });
+      router.push({ name: 'newest' });
     } else {
       return false;
     }
