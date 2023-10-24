@@ -1,9 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { userInfo } = useUserStore();
+</script>
 
 <template>
   <div class="flex flex-col gap-[24px]">
     <div class="flex gap-[24px]">
-      <div class="card">个人简介什么都没有</div>
+      <div class="card" v-if="userInfo?.introduction">
+        {{ userInfo.introduction }}
+      </div>
+      <div class="card" v-else>个人简介什么都没有</div>
       <div class="card"></div>
     </div>
     <div class="flex-1 rounded-md border-[2px]">

@@ -3,7 +3,8 @@ import { uploadImage } from '@/apis/userApi';
 import { ElMessage, type UploadProps } from 'element-plus';
 import imageCompression from 'browser-image-compression';
 
-const imageUrl = ref('');
+defineProps(['modelValue']);
+const emit = defineEmits(['update:modelValue']);
 
 const newFile = reactive(new FormData());
 
@@ -52,17 +53,13 @@ const uploadHandle = async () => {
   const newData = newFile;
   const { path } = await uploadImage(newData);
 
-  imageUrl.value = `\\${path}`;
+  emit('update:modelValue', `\\${path}`);
 };
-
-defineExpose({
-  imageUrl
-});
 </script>
 
 <template>
   <div class="flex">
-    <img :src="imageUrl" class="w-[96px] h-[96px] block rounded-[50%]" />
+    <img :src="modelValue" class="w-[96px] h-[96px] block rounded-[50%]" />
     <el-upload
       class="avatar-uploader"
       action=""

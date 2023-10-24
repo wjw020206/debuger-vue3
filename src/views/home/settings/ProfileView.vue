@@ -1,19 +1,16 @@
 <script setup lang="ts">
+import { updateUser } from '@/apis/userApi';
 import AvatarUploader from '@/components/settings/AvatarUploader.vue';
-const avatarUploaderRef = ref<InstanceType<typeof AvatarUploader> | null>(null);
+import router from '@/plugins/router';
+
 const { userInfo } = useUserStore();
-const formData = reactive({
+const formData = reactive<UserUpdate>({
   nickname: userInfo?.nickname,
+  avatar: userInfo?.avatar,
   birthday: userInfo?.birthday,
   gender: userInfo?.gender,
   website: userInfo?.website,
   introduction: userInfo?.introduction
-});
-
-onMounted(() => {
-  if (userInfo?.avatar) {
-    avatarUploaderRef.value!.imageUrl = userInfo.avatar;
-  }
 });
 
 const options = [
@@ -30,6 +27,14 @@ const options = [
     value: '保密'
   }
 ];
+
+/**
+ * 提交用户资料
+ */
+const submitHandle = async () => {
+  await updateUser(formData);
+  router.push({ name: 'MyAccount' });
+};
 </script>
 
 <template>
@@ -57,7 +62,7 @@ const options = [
             </div>
           </div>
           <el-form-item prop="nickname" label="个人头像">
-            <avatar-uploader ref="avatarUploaderRef" />
+            <avatar-uploader v-model="formData.avatar" />
           </el-form-item>
           <div class="flex justify-between">
             <el-form-item prop="gender" label="性别">
@@ -95,7 +100,7 @@ const options = [
         </div>
       </div>
       <div class="p-[16px] border-[2px] rounded-md mb-[24px]">
-        <base-button class="submit-btn">提交</base-button>
+        <base-button class="submit-btn" @click="submitHandle">提交</base-button>
       </div>
     </el-form>
   </div>

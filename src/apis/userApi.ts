@@ -39,13 +39,13 @@ export async function getUserInfoApi() {
 /**
  * 更新用户资料
  */
-export async function updateUser(data: any) {
+export async function updateUser(data: UserUpdate) {
   await http.request({
     url: '/user/update',
     method: 'patch',
     data
   });
-  useUserStore().getUserInfo();
+  await useUserStore().getUserInfo();
 }
 
 /**

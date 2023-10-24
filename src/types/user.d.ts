@@ -10,3 +10,12 @@ interface User {
   website: string;
   introduction: string;
 }
+
+interface UserUpdate {
+  avatar?: string;
+  nickname?: string;
+  gender?: string;
+  birthday?: string;
+  website?: string;
+  introduction?: string;
+}
