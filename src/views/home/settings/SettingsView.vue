@@ -1,9 +1,17 @@
 <script setup lang="ts">
-import ChangePasswordDialog from '@/components/question/ChangePasswordDialog.vue';
+import ChangePasswordDialog from '@/components/settings/ChangePasswordDialog.vue';
+import ChangeEmailDialog from '@/components/settings/ChangeEmailDialog.vue';
+import ChangeNewEmailDialog from '@/components/settings/ChangeNewEmailDialog.vue';
 
 const { userInfo } = useUserStore();
 const changePasswordDialogRef = ref<InstanceType<
   typeof ChangePasswordDialog
+> | null>(null);
+const changeEmailDialogRef = ref<InstanceType<typeof ChangeEmailDialog> | null>(
+  null
+);
+const changeNewEmailDialogRef = ref<InstanceType<
+  typeof ChangeNewEmailDialog
 > | null>(null);
 </script>
 
@@ -23,6 +31,7 @@ const changePasswordDialogRef = ref<InstanceType<
           </div>
           <div
             class="text-center p-[8px] w-[16%] text-[#3b82f6] cursor-pointer"
+            @click="changeEmailDialogRef?.showDialog"
           >
             编辑
           </div>
@@ -33,7 +42,7 @@ const changePasswordDialogRef = ref<InstanceType<
           <div class="w-[60%] p-[8px] text-[#6c757d]">****************</div>
           <div
             class="text-center p-[8px] w-[16%] text-[#3b82f6] cursor-pointer"
-            @click="changePasswordDialogRef?.showDialog()"
+            @click="changePasswordDialogRef?.showDialog"
           >
             编辑
           </div>
@@ -57,6 +66,11 @@ const changePasswordDialogRef = ref<InstanceType<
   </div>
 
   <change-password-dialog ref="changePasswordDialogRef" />
+  <change-email-dialog
+    ref="changeEmailDialogRef"
+    :changeNewEmailDialogRef="changeNewEmailDialogRef"
+  />
+  <change-new-email-dialog ref="changeNewEmailDialogRef" />
 </template>
 
 <style lang="scss" scoped></style>
