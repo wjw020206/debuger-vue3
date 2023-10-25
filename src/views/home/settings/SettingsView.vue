@@ -1,5 +1,10 @@
 <script setup lang="ts">
+import ChangePasswordDialog from '@/components/question/ChangePasswordDialog.vue';
+
 const { userInfo } = useUserStore();
+const changePasswordDialogRef = ref<InstanceType<
+  typeof ChangePasswordDialog
+> | null>(null);
 </script>
 
 <template>
@@ -28,6 +33,7 @@ const { userInfo } = useUserStore();
           <div class="w-[60%] p-[8px] text-[#6c757d]">****************</div>
           <div
             class="text-center p-[8px] w-[16%] text-[#3b82f6] cursor-pointer"
+            @click="changePasswordDialogRef?.showDialog()"
           >
             编辑
           </div>
@@ -49,6 +55,8 @@ const { userInfo } = useUserStore();
       </div>
     </div>
   </div>
+
+  <change-password-dialog ref="changePasswordDialogRef" />
 </template>
 
 <style lang="scss" scoped></style>
