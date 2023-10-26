@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { updatePassword } from '@/apis/userApi';
 import BaseDialog from '@/components/common/BaseDialog.vue';
 import { verificationCodeRegExp, passwordRegExp } from '@/utils/validators';
-import type { FormInstance, FormRules } from 'element-plus';
+import { ElMessage, type FormInstance, type FormRules } from 'element-plus';
 
 const { userInfo } = useUserStore();
 
@@ -78,9 +79,10 @@ const showDialog = () => {
  */
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  formEl.validate(valid => {
+  formEl.validate(async valid => {
     if (valid) {
-      console.log(formData);
+      await updatePassword(formData.password);
+      ElMessage.success('修改密码成功');
       dialogRef.value?.hideDialog();
     } else {
       return false;

@@ -49,6 +49,19 @@ export async function updateUser(data: UserUpdate) {
 }
 
 /**
+ * 更新用户密码
+ */
+export async function updatePassword(password: string) {
+  await http.request({
+    url: '/user/password',
+    method: 'patch',
+    data: {
+      password
+    }
+  });
+}
+
+/**
  * 图片上传
  */
 export async function uploadImage(file: FormData) {
