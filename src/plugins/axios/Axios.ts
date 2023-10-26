@@ -4,6 +4,7 @@ import axios, {
   type InternalAxiosRequestConfig
 } from 'axios';
 import { ElMessage } from 'element-plus';
+import router from '../router';
 
 export default class Axios {
   private instance;
@@ -68,11 +69,16 @@ export default class Axios {
         return response;
       },
       error => {
-        ElMessage.error(
-          error.response.data.message[error.response.data.message.length - 1]
-            .message ?? error.message
-        );
-        return Promise.reject(error);
+        if (error.response.data.message === '用户未登录') {
+          router.push({ name: 'login' });
+          useStorage().remove(CacheEnum.TOKEN_NAME);
+        } else {
+          ElMessage.error(
+            error.response.data.message[error.response.data.message.length - 1]
+              .message ?? error.message
+          );
+          return Promise.reject(error);
+        }
       }
     );
   }

@@ -1,4 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { deleteUser } from '@/apis/userApi';
+import router from '@/plugins/router';
+import useStorage from '@/utils/useStorage';
+import { ElMessage } from 'element-plus';
+
+const deleteUserHandle = async () => {
+  await deleteUser();
+  ElMessage.success('注销账号成功');
+  useStorage().remove(CacheEnum.TOKEN_NAME);
+  router.push({ name: 'newest' });
+};
+</script>
 
 <template>
   <div class="w-full h-screen flex flex-col items-center">
@@ -17,7 +29,9 @@
           <span class="text-[16px] font-bold">重要提示：</span>
           <span>账号注销后无法找回，您确认要注销吗？</span>
         </div>
-        <base-button class="cancel-btn">开始注销</base-button>
+        <base-button class="cancel-btn" @click="deleteUserHandle"
+          >开始注销</base-button
+        >
       </div>
     </div>
   </div>

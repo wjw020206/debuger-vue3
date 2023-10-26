@@ -76,6 +76,16 @@ export async function updateEmail(email: string) {
 }
 
 /**
+ * 删除用户
+ */
+export async function deleteUser() {
+  await http.request({
+    url: '/user/delete',
+    method: 'delete'
+  });
+}
+
+/**
  * 图片上传
  */
 export async function uploadImage(file: FormData) {
