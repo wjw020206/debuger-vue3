@@ -4,8 +4,6 @@ import { verificationCodeRegExp } from '@/utils/validators';
 import type { FormInstance, FormRules } from 'element-plus';
 import ChangeNewEmailDialog from '@/components/settings/ChangeNewEmailDialog.vue';
 
-const { userInfo } = useUserStore();
-
 interface Props {
   changeNewEmailDialogRef: InstanceType<typeof ChangeNewEmailDialog> | null;
 }
@@ -89,7 +87,7 @@ defineExpose({
         :rules="rules"
       >
         <el-form-item label="邮箱">
-          <base-input disabled v-model="userInfo!.email" />
+          <base-input disabled :value="useUserStore().userInfo?.email" />
           <span class="text-[#6c757d] text-[13px]"
             >我们将发送验证码短信到该邮箱</span
           >

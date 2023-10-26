@@ -3,7 +3,6 @@ import ChangePasswordDialog from '@/components/settings/ChangePasswordDialog.vue
 import ChangeEmailDialog from '@/components/settings/ChangeEmailDialog.vue';
 import ChangeNewEmailDialog from '@/components/settings/ChangeNewEmailDialog.vue';
 
-const { userInfo } = useUserStore();
 const changePasswordDialogRef = ref<InstanceType<
   typeof ChangePasswordDialog
 > | null>(null);
@@ -27,7 +26,7 @@ const changeNewEmailDialogRef = ref<InstanceType<
         <div class="flex">
           <div class="w-[24%] p-[8px]">邮箱</div>
           <div class="w-[60%] p-[8px] text-[#6c757d]">
-            {{ userInfo?.email }}
+            {{ useUserStore().userInfo?.email }}
           </div>
           <div
             class="text-center p-[8px] w-[16%] text-[#3b82f6] cursor-pointer"

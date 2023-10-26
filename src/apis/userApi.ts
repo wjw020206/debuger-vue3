@@ -62,6 +62,20 @@ export async function updatePassword(password: string) {
 }
 
 /**
+ * 更新用户邮箱
+ */
+export async function updateEmail(email: string) {
+  await http.request({
+    url: '/user/email',
+    method: 'patch',
+    data: {
+      email
+    }
+  });
+  await useUserStore().getUserInfo();
+}
+
+/**
  * 图片上传
  */
 export async function uploadImage(file: FormData) {

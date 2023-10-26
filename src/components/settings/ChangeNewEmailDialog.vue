@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { updateEmail } from '@/apis/userApi';
 import BaseDialog from '@/components/common/BaseDialog.vue';
 import { emailRegExp, verificationCodeRegExp } from '@/utils/validators';
-import type { FormInstance, FormRules } from 'element-plus';
+import { ElMessage, type FormInstance, type FormRules } from 'element-plus';
 
 interface RuleForm {
   verificationCode: string;
@@ -58,9 +59,10 @@ const showDialog = () => {
  */
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  formEl.validate(valid => {
+  formEl.validate(async valid => {
     if (valid) {
-      console.log(formData);
+      await updateEmail(formData.email);
+      ElMessage.success('修改邮箱成功');
       dialogRef.value?.hideDialog();
     } else {
       return false;
