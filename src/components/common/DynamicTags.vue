@@ -1,6 +1,18 @@
 <script setup lang="ts">
 import type { ElInput } from 'element-plus';
 
+interface Props {
+  modelValue: string[];
+}
+
+withDefaults(defineProps<Props>(), {
+  modelValue: () => []
+});
+
+const emit = defineEmits(['update:modelValue']);
+
+const dynamicTags = ref<string[]>([]);
+
 /** 输入框实例 */
 const InputRef = ref<InstanceType<typeof ElInput>>();
 
@@ -11,25 +23,24 @@ const inputValue = ref('');
 const inputVisible = ref(false);
 
 /** 显示输入框 */
-const showInput = () => {
+const showInput = async () => {
   inputVisible.value = true;
   nextTick(() => {
     InputRef.value!.input!.focus();
   });
 };
 
-/** 自定义标签 */
-const dynamicTags = ref<string[]>([]);
-
 /** 删除标签 */
 const handleClose = (tag: string) => {
   dynamicTags.value.splice(dynamicTags.value.indexOf(tag), 1);
+  emit('update:modelValue', dynamicTags.value);
 };
 
 /** 确认输入*/
 const handleInputConfirm = () => {
   if (inputValue.value) {
     dynamicTags.value.push(inputValue.value);
+    emit('update:modelValue', dynamicTags.value);
   }
   inputVisible.value = false;
   inputValue.value = '';
@@ -39,16 +50,16 @@ const handleInputConfirm = () => {
 <template>
   <div class="flex gap-[5px]">
     <el-tag
-      v-for="tag in dynamicTags"
+      v-for="tag in modelValue"
       :key="tag"
-      class="w-[80px] !h-[24px] !text-[13px]"
+      class="!h-[24px] !text-[13px]"
       closable
       :disable-transitions="false"
       @close="handleClose(tag)"
     >
       {{ tag }}
     </el-tag>
-    <base-input
+    <el-input
       v-if="inputVisible"
       ref="InputRef"
       v-model="inputValue"

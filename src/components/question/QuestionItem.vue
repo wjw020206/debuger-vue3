@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps<{
+  question: QuestionModel;
+}>();
+</script>
 
 <template>
   <div class="p-[16px] flex border-y-[0.8px] border-y-[#e3e6e8] my-[-0.8px]">
@@ -34,7 +38,7 @@
         :to="{
           path: `/question/detail`
         }"
-        >Typescript 能否提高性能或者稳定性 ？</router-link
+        >{{ question.title }}</router-link
       >
       <div class="flex items-end justify-between">
         <!-- 标签区域 -->

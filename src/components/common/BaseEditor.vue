@@ -1,11 +1,9 @@
-<script setup lang="ts">
-const text = ref('');
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>
     <v-md-editor
-      v-model="text"
+      v-bind="$attrs"
       height="313px"
       left-toolbar="h bold italic strikethrough | code link quote image | ul ol table hr"
       right-toolbar="clear | preview sync-scroll"
