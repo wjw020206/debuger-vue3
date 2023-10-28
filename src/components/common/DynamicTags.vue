@@ -67,7 +67,11 @@ const handleInputConfirm = () => {
       @keyup.enter="handleInputConfirm"
       @blur="handleInputConfirm"
     />
-    <base-button v-else @click="showInput" class="add-tag">
+    <base-button
+      v-else-if="modelValue.length !== 5"
+      @click="showInput"
+      class="add-tag"
+    >
       + 添加标签
     </base-button>
   </div>
