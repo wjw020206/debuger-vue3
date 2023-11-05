@@ -96,7 +96,7 @@ onMounted(async () => {
           <base-tag>{{ tag.title }}</base-tag>
           <!-- 标签描述 -->
           <p
-            class="mt-[8px] text-[14px] whitespace-normal break-words mb-[8px] content"
+            class="mt-[8px] text-[14px] whitespace-normal break-words h-[84px] mb-[8px] content"
           >
             {{ tag.content }}
           </p>
