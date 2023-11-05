@@ -2,21 +2,25 @@
 import { getTagList } from '@/apis/tagApi';
 import BasePagination from '@/components/common/BasePagination.vue';
 
+/** 当前页 */
+const currentPage = ref(1);
+
 /** 搜索标签的值 */
-const tagName = ref('');
+const search = ref('');
 
 /** 标签列表 */
 const tagList = ref<Pagination<TagModel>>();
 
 /** 获取所有标签 */
-const getAll = async (page?: number) => {
-  const data = await getTagList(page);
+const getAll = async () => {
+  const data = await getTagList(currentPage.value, search.value);
   tagList.value = data;
 };
 
 /** 分页切换事件 */
 const handleCurrentChange = async (value: number) => {
-  await getAll(value);
+  currentPage.value = value;
+  await getAll();
   // 页面滚动
   window.scrollTo({
     top: 0
@@ -40,9 +44,10 @@ onMounted(async () => {
     <div class="flex justify-between h-[40px] mb-[24px]">
       <!-- 文本框 -->
       <base-input
-        v-model="tagName"
+        v-model="search"
         placeholder="搜索标签"
         class="search-input"
+        @keyup.enter="getAll"
       />
       <!-- 筛选按钮 -->
       <div class="border border-slate-400 flex cursor-pointer rounded-sm">
@@ -90,6 +95,7 @@ onMounted(async () => {
     <div class="flex justify-center items-center py-[24px]">
       <base-pagination
         :total="tagList?.meta.total ?? 0"
+        :current-page="currentPage"
         :page-size="36"
         @current-change="handleCurrentChange"
       />
