@@ -1,5 +1,31 @@
 <script setup lang="ts">
+import { getTagList } from '@/apis/tagApi';
+import BasePagination from '@/components/common/BasePagination.vue';
+
+/** 搜索标签的值 */
 const tagName = ref('');
+
+/** 标签列表 */
+const tagList = ref<Pagination<TagModel>>();
+
+/** 获取所有标签 */
+const getAll = async (page?: number) => {
+  const data = await getTagList(page);
+  tagList.value = data;
+};
+
+/** 分页切换事件 */
+const handleCurrentChange = async (value: number) => {
+  await getAll(value);
+  // 页面滚动
+  window.scrollTo({
+    top: 0
+  });
+};
+
+onMounted(async () => {
+  await getAll();
+});
 </script>
 
 <template>
@@ -41,19 +67,17 @@ const tagName = ref('');
     <div class="grid grid-cols-4 gap-[20px]">
       <div
         class="border border-[#d6d9dc] h-[177px] rounded-md p-[16px] flex flex-col overflow-hidden"
-        v-for="i in 36"
-        :key="i"
+        v-for="(tag, index) in tagList?.data"
+        :key="index"
       >
         <div>
           <!-- 标签名 -->
-          <base-tag>javascript</base-tag>
+          <base-tag>{{ tag.title }}</base-tag>
           <!-- 标签描述 -->
           <p
-            class="mt-[8px] text-[14px] whitespace-normal break-words mb-[8px]"
+            class="mt-[8px] text-[14px] whitespace-normal break-words mb-[8px] content"
           >
-            JavaScript
-            是一门弱类型的动态脚本语言，支持多种编程范式，包括面向对象和函数式编程，被广泛用于
-            Web...
+            {{ tag.content }}
           </p>
           <!-- 内容数量显示以及关注标签按钮 -->
           <div class="flex">
@@ -64,7 +88,11 @@ const tagName = ref('');
       </div>
     </div>
     <div class="flex justify-center items-center py-[24px]">
-      <base-pagination />
+      <base-pagination
+        :total="tagList?.meta.total ?? 0"
+        :page-size="36"
+        @current-change="handleCurrentChange"
+      />
     </div>
   </div>
 </template>
@@ -72,5 +100,12 @@ const tagName = ref('');
 <style scoped lang="scss">
 .search-input {
   @apply w-[220px];
+}
+
+.content {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
 }
 </style>

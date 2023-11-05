@@ -1,4 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { getTagList } from '@/apis/tagApi';
+
+const tagList = ref<Pagination<TagModel>>();
+
+onMounted(async () => {
+  const data = await getTagList();
+  tagList.value = data;
+});
+</script>
 
 <template>
   <div class="w-[268px]">
@@ -11,36 +20,11 @@
       <div class="flex gap-[1px] flex-wrap">
         <base-tag
           class="text-[14px] bg-blue-200 px-[6px] mr-[4px] mt-[4px] text-blue-600 cursor-pointer rounded-sm"
-          >typescript</base-tag
+          v-for="(tag, index) in tagList?.data"
+          :key="index"
         >
-        <base-tag
-          class="text-[14px] bg-blue-200 px-[6px] mr-[4px] mt-[4px] text-blue-600 cursor-pointer rounded-sm"
-          >HTML</base-tag
-        >
-        <base-tag
-          class="text-[14px] bg-blue-200 px-[6px] mr-[4px] mt-[4px] text-blue-600 cursor-pointer rounded-sm"
-          >CSS</base-tag
-        >
-        <base-tag
-          class="text-[14px] bg-blue-200 px-[6px] mr-[4px] mt-[4px] text-blue-600 cursor-pointer rounded-sm"
-          >Vuejs</base-tag
-        >
-        <base-tag
-          class="text-[14px] bg-blue-200 px-[6px] mr-[4px] mt-[4px] text-blue-600 cursor-pointer rounded-sm"
-          >Nestjs</base-tag
-        >
-        <base-tag
-          class="text-[14px] bg-blue-200 px-[6px] mr-[4px] mt-[4px] text-blue-600 cursor-pointer rounded-sm"
-          >javascript</base-tag
-        >
-        <base-tag
-          class="text-[14px] bg-blue-200 px-[6px] mr-[4px] mt-[4px] text-blue-600 cursor-pointer rounded-sm"
-          >React</base-tag
-        >
-        <base-tag
-          class="text-[14px] bg-blue-200 px-[6px] mr-[4px] mt-[4px] text-blue-600 cursor-pointer rounded-sm"
-          >Nodejs</base-tag
-        >
+          {{ tag.title }}
+        </base-tag>
       </div>
     </div>
   </div>
