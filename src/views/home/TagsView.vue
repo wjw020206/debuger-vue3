@@ -2,6 +2,16 @@
 import { getTagList } from '@/apis/tagApi';
 import BasePagination from '@/components/common/BasePagination.vue';
 
+const method = ref<'popular' | 'letter' | 'latest'>('popular');
+
+watch(method, async () => {
+  await getAll();
+  // 页面滚动
+  window.scrollTo({
+    top: 0
+  });
+});
+
 /** 当前页 */
 const currentPage = ref(1);
 
@@ -13,7 +23,7 @@ const tagList = ref<Pagination<TagModel>>();
 
 /** 获取所有标签 */
 const getAll = async () => {
-  const data = await getTagList(currentPage.value, search.value);
+  const data = await getTagList(currentPage.value, search.value, method.value);
   tagList.value = data;
 };
 
@@ -52,17 +62,23 @@ onMounted(async () => {
       <!-- 筛选按钮 -->
       <div class="border border-slate-400 flex cursor-pointer rounded-sm">
         <div
-          class="text-[16px] flex items-center py-[6px] px-[12px] bg-blue-500 text-white"
+          class="filter"
+          :class="{ active: method === 'popular' }"
+          @click="method = 'popular'"
         >
           热门
         </div>
         <div
-          class="text-[16px] flex items-center py-[6px] px-[12px] border-x border-slate-400 hover:bg-blue-500 hover:text-white"
+          class="filter"
+          :class="{ active: method === 'letter' }"
+          @click="method = 'letter'"
         >
           首字母
         </div>
         <div
-          class="text-[16px] flex items-center py-[6px] px-[12px] hover:bg-blue-500 hover:text-white"
+          class="filter"
+          :class="{ active: method === 'latest' }"
+          @click="method = 'latest'"
         >
           最新
         </div>
@@ -113,5 +129,15 @@ onMounted(async () => {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
   overflow: hidden;
+}
+
+.filter {
+  @apply text-[16px] flex items-center py-[6px] px-[12px];
+  &:hover {
+    @apply bg-blue-400 text-white;
+  }
+  &.active {
+    @apply bg-blue-500 text-white;
+  }
 }
 </style>
