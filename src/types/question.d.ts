@@ -5,6 +5,10 @@ interface QuestionModel {
   createAt: string;
   updateAt: string;
   userId: number;
+  vote: number;
+  answerCount: number;
+  read: number;
+  tags: TagModel[];
 }
 
 interface Pagination<T> {

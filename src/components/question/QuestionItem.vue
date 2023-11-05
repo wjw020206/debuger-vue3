@@ -11,7 +11,7 @@ defineProps<{
       <div
         class="num-card flex flex-col items-center w-[48px] h-[45px] mr-[8px]"
       >
-        <span class="text-[16px]">0</span>
+        <span class="text-[16px]">{{ question.vote }}</span>
         <span class="text-[14px]">投票</span>
       </div>
 
@@ -19,7 +19,7 @@ defineProps<{
       <div
         class="num-card flex flex-col items-center w-[48px] h-[45px] mr-[8px]"
       >
-        <span class="text-[16px]">5</span>
+        <span class="text-[16px]">{{ question.answerCount }}</span>
         <span class="text-[14px]">回答</span>
       </div>
 
@@ -27,7 +27,7 @@ defineProps<{
       <div
         class="num-card flex flex-col items-center w-[48px] h-[45px] mr-[8px]"
       >
-        <span class="text-[16px]">65</span>
+        <span class="text-[16px]">{{ question.read }}</span>
         <span class="text-[14px]">阅读</span>
       </div>
     </div>
@@ -43,8 +43,12 @@ defineProps<{
       <div class="flex items-end justify-between">
         <!-- 标签区域 -->
         <div class="flex gap-[1px]">
-          <base-tag class="tag">typescript</base-tag>
-          <base-tag class="tag">前端</base-tag>
+          <base-tag
+            class="tag"
+            v-for="(tag, index) in question.tags"
+            :key="index"
+            >{{ tag.title }}</base-tag
+          >
         </div>
 
         <!-- 回答者与作者显示区域 -->
