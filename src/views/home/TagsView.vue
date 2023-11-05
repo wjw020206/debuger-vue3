@@ -47,7 +47,7 @@ onMounted(async () => {
         v-model="search"
         placeholder="搜索标签"
         class="search-input"
-        @keyup.enter="getAll"
+        @input="getAll"
       />
       <!-- 筛选按钮 -->
       <div class="border border-slate-400 flex cursor-pointer rounded-sm">
