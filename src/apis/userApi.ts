@@ -127,3 +127,29 @@ export async function getFavoriteTags() {
     method: 'get'
   });
 }
+
+/**
+ * 添加关注标签
+ */
+export async function addFavoriteTagApi(tagId: number) {
+  return await http.request({
+    url: '/user/add-favorite-tags',
+    method: 'post',
+    data: {
+      tagId
+    }
+  });
+}
+
+/**
+ * 删除关注标签
+ */
+export async function removeFavoriteTagApi(tagId: number) {
+  return await http.request({
+    url: '/user/remove-favorite-tags',
+    method: 'delete',
+    data: {
+      tagId
+    }
+  });
+}

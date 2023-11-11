@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { getTagList } from '@/apis/tagApi';
+import {
+  getFavoriteTags,
+  removeFavoriteTagApi,
+  addFavoriteTagApi
+} from '@/apis/userApi';
 import BasePagination from '@/components/common/BasePagination.vue';
+import useStorage from '@/utils/useStorage';
 
 const method = ref<'popular' | 'letter' | 'latest'>('popular');
 
@@ -21,10 +27,36 @@ const search = ref('');
 /** 标签列表 */
 const tagList = ref<Pagination<TagModel>>();
 
+/** 关注的标签列表 */
+const favoriteTagList = ref<Array<TagModel>>();
+
+/** 是否关注标签 */
+const isFavoriteTag = (tagId: number) => {
+  return favoriteTagList.value?.find(tag => {
+    return tag.id === tagId;
+  });
+};
+
+/** 删除关注的标签 */
+const removeFavoriteTag = async (tagId: number) => {
+  await removeFavoriteTagApi(tagId);
+  getAll();
+};
+
+/** 添加关注的标签 */
+const addFavoriteTag = async (tagId: number) => {
+  await addFavoriteTagApi(tagId);
+  getAll();
+};
+
 /** 获取所有标签 */
 const getAll = async () => {
   const data = await getTagList(currentPage.value, search.value, method.value);
   tagList.value = data;
+  if (useStorage().get(CacheEnum.TOKEN_NAME)) {
+    const { favoriteTags } = await getFavoriteTags();
+    favoriteTagList.value = favoriteTags;
+  }
 };
 
 /** 分页切换事件 */
@@ -90,6 +122,7 @@ onMounted(async () => {
         class="border border-[#d6d9dc] h-[177px] rounded-md p-[16px] flex flex-col overflow-hidden"
         v-for="(tag, index) in tagList?.data"
         :key="index"
+        :class="{ 'bg-[#FDFBF1]': isFavoriteTag(tag.id) }"
       >
         <div>
           <!-- 标签名 -->
@@ -103,7 +136,20 @@ onMounted(async () => {
           <!-- 内容数量显示以及关注标签按钮 -->
           <div class="flex">
             <p class="text-[#6c757d]">2048篇内容</p>
-            <a href="javascript:;" class="ml-[8px] text-blue-400">关注标签</a>
+            <a
+              href="javascript:;"
+              class="ml-[8px] text-blue-400"
+              v-if="isFavoriteTag(tag.id)"
+              @click="removeFavoriteTag(tag.id)"
+              >已关注</a
+            >
+            <a
+              href="javascript:;"
+              class="ml-[8px] text-blue-400"
+              v-else
+              @click="addFavoriteTag(tag.id)"
+              >关注标签</a
+            >
           </div>
         </div>
       </div>
