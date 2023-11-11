@@ -38,6 +38,16 @@ const handleCurrentChange = async (value: number) => {
   });
 };
 
+/** 显示用户关注的前三个标签 */
+const showTag = (favoriteTags: Array<TagModel>) => {
+  return favoriteTags
+    .splice(0, 3)
+    .map(item => {
+      return item.title;
+    })
+    .join('，');
+};
+
 onMounted(async () => {
   await getAll();
 });
@@ -88,7 +98,9 @@ onMounted(async () => {
           <div class="flex flex-col ml-[10px]">
             <div class="flex flex-col justify-between">
               <!-- 昵称 -->
-              <a href="#" class="text-[#0074cc]">{{ user.nickname }}</a>
+              <a href="javascript:;" class="text-[#0074cc]">{{
+                user.nickname
+              }}</a>
 
               <!-- 注册时间 -->
               <time class="text-[12px] text-[#6a737c]"
@@ -99,8 +111,7 @@ onMounted(async () => {
             </div>
             <!-- 关注的标签 -->
             <div class="flex text-[#0074cc] text-[12px]">
-              <a href="#">javascript</a>，<a href="#">html</a>，
-              <a href="#">css</a>
+              {{ showTag(user.favoriteTags) }}
             </div>
           </div>
         </div>

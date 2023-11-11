@@ -9,6 +9,7 @@ interface User {
   birthday: string;
   website: string;
   introduction: string;
+  favoriteTags: Array<TagModel>;
 }
 
 interface UserUpdate {
