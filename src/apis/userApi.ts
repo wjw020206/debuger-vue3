@@ -117,3 +117,13 @@ export async function getUserList(
     }
   });
 }
+
+/**
+ * 获取用户关注的标签
+ */
+export async function getFavoriteTags() {
+  return await http.request<FavoriteTags>({
+    url: '/user/favorite-tags',
+    method: 'get'
+  });
+}

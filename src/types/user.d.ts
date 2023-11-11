@@ -19,3 +19,7 @@ interface UserUpdate {
   website?: string;
   introduction?: string;
 }
+
+interface FavoriteTags {
+  favoriteTags: Array<TagModel>;
+}
