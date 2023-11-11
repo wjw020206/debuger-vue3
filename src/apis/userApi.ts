@@ -98,3 +98,22 @@ export async function uploadImage(file: FormData) {
     data: file
   });
 }
+
+/**
+ * 获取用户列表
+ */
+export async function getUserList(
+  page = 1,
+  search?: string,
+  method: 'letter' | 'latest' = 'latest'
+) {
+  return await http.request<Pagination<User>>({
+    url: '/user',
+    method: 'get',
+    params: {
+      page,
+      search,
+      method
+    }
+  });
+}
