@@ -135,7 +135,7 @@ onMounted(async () => {
           </p>
           <!-- 内容数量显示以及关注标签按钮 -->
           <div class="flex">
-            <p class="text-[#6c757d]">2048篇内容</p>
+            <p class="text-[#6c757d]">{{ tag.questions.length }}篇内容</p>
             <a
               href="javascript:;"
               class="ml-[8px] text-blue-400"
