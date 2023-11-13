@@ -21,7 +21,9 @@ onMounted(async () => {
     <div class="flex flex-col">
       <div class="flex justify-between items-center py-[8px] border-b">
         <h2 class="font-bold">关注标签</h2>
-        <RouterLink to="/" class="text-[#0074cc]">管理</RouterLink>
+        <RouterLink :to="{ name: 'followTags' }" class="text-[#0074cc]"
+          >管理</RouterLink
+        >
       </div>
       <!-- 标签容器 -->
       <div class="flex gap-[1px] flex-wrap">

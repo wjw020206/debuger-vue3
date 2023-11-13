@@ -2,6 +2,7 @@
 interface SwitchItem {
   name?: string;
   text: string;
+  path?: string | Array<string>;
 }
 
 interface Props {
@@ -43,7 +44,13 @@ defineExpose({
         :to="{ name: item.name }"
         :key="index"
         class="text"
-        :class="{ active: $route.name === item.name }"
+        :class="{
+          active:
+            $route.name === item.name ||
+            (Array.isArray(item.path)
+              ? item.path.includes($route.path)
+              : item.path === $route.path)
+        }"
       >
         {{ item.text }}
       </router-link>

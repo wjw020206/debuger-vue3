@@ -5,7 +5,7 @@ const switchList = [
     text: '最新'
   },
   {
-    name: 'push-me',
+    name: 'pushMe',
     text: '为我推送'
   },
   {

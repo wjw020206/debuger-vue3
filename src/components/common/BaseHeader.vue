@@ -31,7 +31,7 @@ const searchValue = ref('');
           <img
             :src="useUserStore().userInfo?.avatar"
             class="w-[30px] h-[30px] cursor-pointer"
-            @click="$router.push({ name: 'MyAccount' })"
+            @click="$router.push({ name: 'myHome' })"
           />
           <el-icon size="30" color="#000" class="cursor-pointer">
             <park-folder-focus-one />

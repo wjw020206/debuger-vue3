@@ -20,7 +20,7 @@ export default {
           component: () => import('@/views/home/question/NewestView.vue')
         },
         {
-          name: 'push-me',
+          name: 'pushMe',
           path: 'push-me',
           component: () => import('@/views/home/question/PushMe.vue')
         },

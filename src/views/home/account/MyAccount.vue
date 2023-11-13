@@ -4,22 +4,34 @@ import dayjs from 'dayjs';
 
 const { userInfo } = useUserStore();
 
-/**获赞数 */
+/** 获赞数 */
 const praise = ref(0);
 
 const switchList = ref([
   {
+    name: 'myHome',
+    path: '/my-account',
     text: '主页'
   },
-  { text: '回答' },
-  { text: '提问' },
-  { text: '关注' }
+  {
+    name: 'myAnswer',
+    path: '/my-account/answer',
+    text: '回答'
+  },
+  { name: 'myQuestion', path: '/my-account/question', text: '提问' },
+  {
+    name: 'followTags',
+    path: [
+      '/my-account/follow/tags',
+      '/my-account/follow/question',
+      '/my-account/follow/person',
+      '/my-account/follow/fans'
+    ],
+    text: '关注'
+  }
 ]);
 
 const switchRef = ref<InstanceType<typeof BaseSwitch> | null>(null);
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const toggle = (index: number) => {};
 </script>
 
 <template>
@@ -58,15 +70,16 @@ const toggle = (index: number) => {};
       <div class="flex justify-center">
         <base-switch
           :switchList="switchList"
-          @change="toggle"
           ref="switchRef"
+          :isRouter="true"
         />
       </div>
       <div class="content mt-[20px] ml-[20px]">
-        <account-homepage v-if="switchRef?.currentIndex === 0" />
-        <account-answer v-else-if="switchRef?.currentIndex === 1" />
-        <account-question v-else-if="switchRef?.currentIndex === 2" />
-        <account-follow v-else-if="switchRef?.currentIndex === 3" />
+        <RouterView v-slot="{ Component, route }">
+          <template v-if="Component">
+            <component :is="Component" :key="route.fullPath" />
+          </template>
+        </RouterView>
       </div>
     </div>
   </div>

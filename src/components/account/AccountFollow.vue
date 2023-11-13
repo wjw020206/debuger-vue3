@@ -7,14 +7,39 @@
         class="flex py-[8px] px-[16px] text-[#3b82f6] text-[16px] border-b justify-center"
       >
         <div class="flex cursor-pointer h-[30px]">
-          <div class="btn">关注标签</div>
-          <div class="btn">关注的问题</div>
-          <div class="btn">关注的收藏夹</div>
-          <div class="btn">关注的人</div>
-          <div class="btn">我的粉丝</div>
+          <router-link
+            :to="{ name: 'followTags' }"
+            class="btn"
+            :class="{ active: $route.path === '/my-account/follow/tags' }"
+            >关注标签</router-link
+          >
+          <router-link
+            :to="{ name: 'followQuestions' }"
+            class="btn"
+            :class="{ active: $route.path === '/my-account/follow/question' }"
+            >关注的问题</router-link
+          >
+          <router-link
+            :to="{ name: 'followPerson' }"
+            class="btn"
+            :class="{
+              active: $route.path === '/my-account/follow/person'
+            }"
+            >关注的人</router-link
+          >
+          <router-link
+            :to="{ name: 'followFans' }"
+            class="btn"
+            :class="{ active: $route.path === '/my-account/follow/fans' }"
+            >我的粉丝</router-link
+          >
         </div>
       </div>
-      <div class="p-[16px]">暂无数据</div>
+      <RouterView v-slot="{ Component, route }">
+        <template v-if="Component">
+          <component :is="Component" :key="route.fullPath" />
+        </template>
+      </RouterView>
     </div>
   </div>
 </template>
@@ -34,6 +59,11 @@
   }
 
   &:hover {
+    @apply text-white;
+    background: $primary-color;
+  }
+
+  &.active {
     @apply text-white;
     background: $primary-color;
   }
